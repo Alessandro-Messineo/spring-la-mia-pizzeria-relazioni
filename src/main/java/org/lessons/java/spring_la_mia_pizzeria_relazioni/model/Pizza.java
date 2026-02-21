@@ -1,10 +1,13 @@
-package org.lessons.java.spring_la_mia_pizzeria_relazioni.classes;
+package org.lessons.java.spring_la_mia_pizzeria_relazioni.model;
+
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -33,9 +36,12 @@ public class Pizza {
     private String urlImg;
 
     @NotNull(message = "Enter price")
-    @DecimalMin(value = "0.0", inclusive = true, message ="Price must be greater than or equal to 0")
+    @DecimalMin(value = "0.0", inclusive = true, message = "Price must be greater than or equal to 0")
     @Column(nullable = false)
     private Double price;
+
+    @OneToMany(mappedBy = "pizza")
+    private List<SpecialOffer> specialOffers;
 
     public Pizza() {
     }
@@ -88,4 +94,11 @@ public class Pizza {
         this.price = price;
     }
 
+    public List<SpecialOffer> getSpecialOffers() {
+        return this.specialOffers;
+    }
+
+    public void setSpecialOffers(List<SpecialOffer> specialOffers) {
+        this.specialOffers = specialOffers;
+    }
 }

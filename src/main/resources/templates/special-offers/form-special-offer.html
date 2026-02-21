@@ -13,10 +13,13 @@
 
                 <div class="card shadow p-4">
                     <h3 class="text-center mb-1">
-                        <p class="mb-4">Nuova Offerta Speciale</p>
+                        <p class="mb-4" th:unless="${edit}">Nuova Offerta Speciale</p>
+                        <p class="mb-4" th:if="${edit}">Modifica Offerta Speciale</p>
                     </h3>
 
-                    <form th:object="${specialOffer}" th:action="@{/special-offer/create}" method="post">
+                    <form th:object="${specialOffer}"
+                        th:action="${edit} ? @{/special-offer/edit/{id}(id=*{id})} : @{/special-offer/create}"
+                        method="post">
 
                         <input type="hidden" th:field="*{pizza.id}">
 

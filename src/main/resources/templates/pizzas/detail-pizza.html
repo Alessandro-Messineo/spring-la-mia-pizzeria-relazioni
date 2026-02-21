@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/header :: header}"></head>
+
+<body>
+
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container mt-4">
+
+        <div class="card p-3">
+            <div class="row g-3 align-items-center" th:object="${pizza}">
+                
+                <div class="col-md-4 text-center">
+                    <img th:src="*{urlImg}" th:alt="*{name}" class="img-fluid rounded">
+                </div>
+
+                <div class="col-md-8">
+                    <h2 th:text="*{name}"></h2>
+                    <p th:text="*{description}"></p>
+                    <h4 th:text="*{price + ' €'}" class="text-success"></h4>
+                    <a th:href="@{/}" class="btn btn-primary mt-2">Torna alla lista</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

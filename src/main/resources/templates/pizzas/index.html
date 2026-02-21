@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/header :: header}"></head>
+
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+    <div class="container mt-4">
+
+        <h1 class="mb-4 text-center display-4">Le nostre pizze</h1>
+
+        <div class="d-flex justify-content-between mb-4">
+            <form th:action="@{/create}" method="get">
+                <button type="submit" class="btn btn-primary">
+                    Aggiungi pizza
+                </button>
+            </form>
+
+            <form th:action="@{/}" class="d-flex">
+                <input type="text" name="search" th:value="${search}" class="form-control me-2"
+                    placeholder="Cerca pizza per nome...">
+                <button class="btn btn-primary" type="submit">
+                    Cerca
+                </button>
+            </form>
+        </div>
+
+        <table class="table table-striped table-hover table-sm align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Foto</th>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">Prezzo</th>
+                    <th style="width: 180px;">Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pizza : ${pizza}" th:object="${pizza}">
+                    <td>
+                        <img th:src="*{urlImg}" alt="error img" width="100" height="75">
+                    </td>
+                    <td class="text-center" th:text="*{name}"></td>
+                    <td class="text-center" th:text="*{price} + ' €'"></td>
+                    <td style="width: 180px;">
+                        <div class="d-flex gap-2 justify-content-end">
+
+                            <a th:href="@{'/pizza/' + *{id}}" class="btn btn-sm btn-primary">
+                                Visualizza
+                            </a>
+
+                            <a th:href="@{/pizza/edit/{id}(id=*{id})}" class="btn btn-sm btn-warning">
+                                Modifica
+                            </a>
+
+                            <form th:action="@{/delete/{id}(id=*{id})}" method="post" class="m-0">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    Elimina
+                                </button>
+                            </form>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div th:if="${pizza.size() == 0}" class="alert alert-warning text-center">
+            Non ci sono pizze disponibili.
+        </div>
+
+    </div>
+</body>
+
+</html>

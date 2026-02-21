@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/header :: header}"></head>
+
+<body>
+
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+
+                <div class="card shadow p-4">
+                    <h3 class="text-center mb-4">Modifica Pizza</h3>
+
+                    <form th:object="${pizza}" th:action="@{/create}" method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" th:field="*{name}" class="form-control"
+                                th:classappend="${#fields.hasErrors('name')} ? ' is-invalid' : ''">
+
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
+                                th:each="err : ${#fields.errors('name')}" th:text="${err}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Ingredients</label>
+                            <input type="text" th:field="*{description}" class="form-control"
+                                th:classappend="${#fields.hasErrors('description')} ? ' is-invalid' : ''">
+
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}"
+                                th:each="err : ${#fields.errors('description')}" th:text="${err}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Image URL</label>
+                            <input type="text" th:field="*{urlImg}" class="form-control"
+                                th:classappend="${#fields.hasErrors('urlImg')} ? ' is-invalid' : ''">
+
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('urlImg')}"
+                                th:each="err : ${#fields.errors('urlImg')}" th:text="${err}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Price</label>
+                            <input type="text" th:field="*{price}" class="form-control"
+                                th:classappend="${#fields.hasErrors('price')} ? ' is-invalid' : ''">
+
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}"
+                                th:each="err : ${#fields.errors('price')}" th:text="${err}">
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                Salva modifiche
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

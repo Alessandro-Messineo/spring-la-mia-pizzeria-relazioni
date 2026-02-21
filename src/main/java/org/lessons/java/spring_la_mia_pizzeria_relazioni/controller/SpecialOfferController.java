@@ -75,4 +75,16 @@ public class SpecialOfferController {
         return "redirect:/pizza/" + idPizza;
     }
 
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, Model model) {
+
+        SpecialOffer offer = specialOfferRepository.findById(id).get();
+
+        Integer idPizza = offer.getPizza().getId();
+
+        specialOfferRepository.deleteById(id);
+
+        return "redirect:/pizza/" + idPizza;
+    }
+
 }

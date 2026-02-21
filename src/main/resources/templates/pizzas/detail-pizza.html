@@ -34,19 +34,17 @@
                 </a>
             </div>
 
-            <div th:if="${pizza.specialOffers.size() == 0}"
-                class="alert alert-info mb-0">
+            <div th:if="${pizza.specialOffers.size() == 0}" class="alert alert-info mb-0">
                 Nessuna offerta speciale disponibile per questa pizza.
             </div>
 
-            <table th:if="${pizza.specialOffers.size() > 0}"
-                class="table table-striped table-hover align-middle mb-0">
+            <table th:if="${pizza.specialOffers.size() > 0}" class="table table-striped table-hover align-middle mb-0">
                 <thead class="table-dark">
                     <tr>
                         <th>Titolo</th>
                         <th class="text-center">Data Inizio</th>
                         <th class="text-center">Data Fine</th>
-                        <th style="width: 100px;">Azioni</th>
+                        <th style="width: 160px;">Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,9 +53,15 @@
                         <td class="text-center" th:text="${offer.startDate}"></td>
                         <td class="text-center" th:text="${offer.endDate}"></td>
                         <td>
-                            <a th:href="@{/special-offer/edit/{id}(id=${offer.id})}" class="btn btn-sm btn-warning">
-                                Modifica
-                            </a>
+                            <div class="d-flex gap-2">
+                                <a th:href="@{/special-offer/edit/{id}(id=${offer.id})}" class="btn btn-sm btn-warning">
+                                    Modifica
+                                </a>
+                                <form th:action="@{/special-offer/delete/{id}(id=${offer.id})}" method="post"
+                                    class="m-0">
+                                    <button type="submit" class="btn btn-sm btn-danger">Elimina</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

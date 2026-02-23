@@ -75,9 +75,9 @@ public class PizzaController {
             return "pizzas/form-pizza";
         }
 
-        repository.save(formPizza);
-
-        return "redirect:/";
+        Pizza saved = repository.save(formPizza);
+        
+        return "redirect:/pizza/" + saved.getId();
     }
 
     @GetMapping("pizza/edit/{id}")
@@ -94,14 +94,14 @@ public class PizzaController {
     public String update(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("ingredients", ingredientRepository.findAll()); 
+            model.addAttribute("ingredients", ingredientRepository.findAll());
             model.addAttribute("edit", true);
             return "pizzas/form-pizza";
         }
 
-        repository.save(formPizza);
+        Pizza saved = repository.save(formPizza);
 
-        return "redirect:/";
+        return "redirect:/pizza/" + saved.getId();
     }
 
     @PostMapping("delete/{id}")

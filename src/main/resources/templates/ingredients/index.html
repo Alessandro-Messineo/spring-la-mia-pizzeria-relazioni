@@ -30,7 +30,12 @@
                     <td th:text="${ingredient.name}"></td>
                     <td>
                         <div class="d-flex gap-2">
-                           <!-- pulsanti per modifica ed eliminazione -->
+                            <a th:href="@{/ingredient/edit/{id}(id=${ingredient.id})}" class="btn btn-sm btn-warning">
+                                Modifica
+                            </a>
+                            <form th:action="@{/ingredient/delete/{id}(id=${ingredient.id})}" method="post" class="m-0">
+                                <button type="submit" class="btn btn-sm btn-danger">Elimina</button>
+                            </form>
                         </div>
                     </td>
                 </tr>

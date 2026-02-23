@@ -11,18 +11,15 @@
         <h1 class="mb-4 text-center display-4">Le nostre pizze</h1>
 
         <div class="d-flex justify-content-between mb-4">
-            <form th:action="@{/create}" method="get">
-                <button type="submit" class="btn btn-primary">
-                    Aggiungi pizza
-                </button>
-            </form>
+            <div class="d-flex gap-2">
+                <a th:href="@{/create}" class="btn btn-primary">Aggiungi pizza</a>
+                <a th:href="@{/ingredient}" class="btn btn-outline-primary">Gestisci ingredienti</a>
+            </div>
 
             <form th:action="@{/}" class="d-flex">
                 <input type="text" name="search" th:value="${search}" class="form-control me-2"
                     placeholder="Cerca pizza per nome...">
-                <button class="btn btn-primary" type="submit">
-                    Cerca
-                </button>
+                <button class="btn btn-primary" type="submit">Cerca</button>
             </form>
         </div>
 
@@ -44,21 +41,11 @@
                     <td class="text-center" th:text="*{price} + ' €'"></td>
                     <td style="width: 180px;">
                         <div class="d-flex gap-2 justify-content-end">
-
-                            <a th:href="@{'/pizza/' + *{id}}" class="btn btn-sm btn-primary">
-                                Visualizza
-                            </a>
-
-                            <a th:href="@{/pizza/edit/{id}(id=*{id})}" class="btn btn-sm btn-warning">
-                                Modifica
-                            </a>
-
+                            <a th:href="@{'/pizza/' + *{id}}" class="btn btn-sm btn-primary">Visualizza</a>
+                            <a th:href="@{/pizza/edit/{id}(id=*{id})}" class="btn btn-sm btn-warning">Modifica</a>
                             <form th:action="@{/delete/{id}(id=*{id})}" method="post" class="m-0">
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    Elimina
-                                </button>
+                                <button type="submit" class="btn btn-sm btn-danger">Elimina</button>
                             </form>
-
                         </div>
                     </td>
                 </tr>

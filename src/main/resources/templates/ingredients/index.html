@@ -10,9 +10,10 @@
 
         <h1 class="mb-4 text-center display-4">Ingredienti</h1>
 
-        <!-- pulsante per aggiunta di ingrediente -->
+        <div class="d-flex justify-content-end mb-3">
+            <a th:href="@{/ingredient/create}" class="btn btn-success">Aggiungi ingrediente</a>
+        </div>
         
-
         <div th:if="${ingredients.size() == 0}" class="alert alert-info">
             Nessun ingrediente disponibile.
         </div>

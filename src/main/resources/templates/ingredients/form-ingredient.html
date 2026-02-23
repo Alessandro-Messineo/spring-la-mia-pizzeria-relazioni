@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/header :: header}"></head>
+
+<body>
+
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+
+                <div class="card shadow p-4">
+                    <h3 class="text-center mb-4">
+                        <span th:unless="${edit}">Nuovo Ingrediente</span>
+                        <span th:if="${edit}">Modifica Ingrediente</span>
+                    </h3>
+
+                    <form th:object="${ingredient}"
+                        th:action="${edit} ? @{/ingredient/edit/{id}(id=*{id})} : @{/ingredient/create}"
+                        method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label">Nome</label>
+                            <input type="text" th:field="*{name}" class="form-control"
+                                th:classappend="${#fields.hasErrors('name')} ? ' is-invalid' : ''">
+                                
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
+                                th:each="err : ${#fields.errors('name')}" th:text="${err}">
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">Salva</button>
+                            <a th:href="@{/ingredient}" class="btn btn-outline-secondary">Annulla</a>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
